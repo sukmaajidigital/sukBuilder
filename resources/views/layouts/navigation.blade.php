@@ -21,6 +21,13 @@
                         {{ __('Table Builder') }}
                     </x-nav-link>
                 </div>
+                @foreach ($dynamicMenuItems as $item)
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('dynamic.index', $item->slug)" :active="request()->is('data/' . $item->slug . '*')">
+                            {{ $item->name }}
+                        </x-nav-link>
+                    </div>
+                @endforeach
             </div>
 
             <!-- Settings Dropdown -->

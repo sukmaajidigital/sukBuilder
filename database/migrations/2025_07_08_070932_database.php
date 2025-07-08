@@ -39,6 +39,22 @@ return new class extends Migration
             $table->longText('value')->nullable();
             $table->timestamps();
         });
+
+        Schema::create('menus', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->unique();
+            $table->string('slug')->unique();
+            $table->timestamps();
+        });
+        Schema::create('menu_items', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('menu_id')->constrained('menus')->onDelete('cascade');
+            $table->string('title');
+            $table->string('url');
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->integer('order')->default(0);
+            $table->timestamps();
+        });
     }
 
     /**
